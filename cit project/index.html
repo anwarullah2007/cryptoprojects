@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Info Tamil - Guides & PDFs</title>
+    <style>
+        #intro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #000000, #1a1500, #220f00, #000000);
+    background-size: 400% 400%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 70px; /* Increased gap for spacing */
+    z-index: 99999;
+    animation: gradientBG 4s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+#logoAnim {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(0.3);
+    border-radius: 50%;
+    padding: 10px; /* Creates the larger boundary around the logo */
+    border: 4px solid var(--accent-gold);
+    animation: logo-glow 2s ease-in-out infinite;
+}
+
+@keyframes logo-glow {
+    0% {
+        box-shadow: 0 0 20px var(--accent-gold), inset 0 0 20px var(--accent-gold);
+        border-color: var(--accent-gold);
+    }
+    50% {
+        box-shadow: 0 0 60px var(--accent-orange), inset 0 0 40px var(--accent-orange);
+        border-color: var(--accent-orange);
+    }
+    100% {
+        box-shadow: 0 0 20px var(--accent-gold), inset 0 0 20px var(--accent-gold);
+        border-color: var(--accent-gold);
+    }
+}
+
+.loading-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    opacity: 0;
+}
+
+.loading-text {
+    color: var(--accent-gold);
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+}
+
+.loading-bar-container {
+    width: 250px;
+    height: 6px;
+    background: #222;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.loading-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent-gold), var(--accent-orange));
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--accent-orange);
+}
+
+/* hero text animation start state */
+.hero h1 {
+    transform: translate(-200px, 200px);
+    opacity: 0;
+}
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --accent-gold: #f3ba2f; /* Binance-style gold */
+            --accent-orange: #ff6f00; /* Deep orange */
+            --text-main: #f0f0f0;
+            --text-secondary: #aaaaaa;
+            --gradient: linear-gradient(90deg, var(--accent-gold), var(--accent-orange));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navbar */
+        header {
+            background-color: #000;
+            padding: 1rem 5%;
+            border-bottom: 2px solid var(--accent-gold);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span.highlight {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-logo {
+            height: 45px;
+            width: 45px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid var(--accent-gold);
+            box-shadow: 0 0 8px rgba(243, 186, 47, 0.6);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .header-logo:hover {
+            box-shadow: 0 0 15px rgba(243, 186, 47, 0.9);
+            transform: scale(1.05);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-gold);
+        }
+
+        .special-link {
+            border: 2px solid var(--accent-orange);
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            color: var(--accent-gold);
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(255, 111, 0, 0.2);
+        }
+
+        .special-link:hover {
+            background: var(--gradient);
+            color: #000;
+            border-color: transparent;
+            box-shadow: 0 0 20px rgba(255, 111, 0, 0.6);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: radial-gradient(circle at center, #1a1500 0%, var(--bg-dark) 100%);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-weight: bold;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Content Container */
+        .container {
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            width: 100%;
+        }
+
+        .section-header {
+            font-size: 2rem;
+            color: var(--accent-gold);
+            border-bottom: 1px solid #333;
+            padding-bottom: 0.5rem;
+            margin-top: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Grid Cards */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media screen and (min-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .card {
+            background: linear-gradient(145deg, var(--bg-card), #0f0f0f);
+            border: 1px solid #222;
+            border-radius: 14px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 12px 28px rgba(243, 186, 47, 0.15);
+        }
+
+        /* Specific Video Card Styling for Edge-to-Edge Thumbnail */
+        .video-card {
+            padding: 0;
+        }
+
+        .video-card iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: none;
+            border-bottom: 2px solid #222;
+            transition: border-color 0.4s ease;
+            display: block;
+        }
+
+        .card:hover iframe {
+            border-color: var(--accent-gold);
+        }
+
+        .video-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--gradient);
+            color: #000;
+            padding: 0.6rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Banner Styling */
+        .promo-banner {
+            background: linear-gradient(45deg, #111, #1a1a1a);
+            border: 1px solid var(--accent-gold);
+            border-radius: 12px;
+            margin: -2rem auto 3rem;
+            padding: 1.5rem 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            gap: 1.5rem;
+            max-width: 1000px;
+            box-shadow: 0 5px 20px rgba(243, 186, 47, 0.15);
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .promo-banner h3 {
+            color: var(--accent-gold);
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .promo-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .promo-btn {
+            padding: 0.8rem 1.8rem;
+            border-radius: 8px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #000;
+            background: var(--gradient);
+            transition: transform 0.3s ease;
+        }
+
+        .promo-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Popup Styling */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-content {
+            background: var(--bg-card);
+            border: 2px solid var(--accent-orange);
+            border-radius: 16px;
+            padding: 2.5rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+            box-shadow: 0 15px 40px rgba(255, 111, 0, 0.3);
+        }
+
+        .popup-overlay.active .popup-content {
+            transform: translateY(0);
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .popup-close:hover {
+            color: #fff;
+        }
+
+        .popup-content h2 {
+            font-size: 2rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        /* Branding & Community Sections */
+        .about-section {
+            background: line
+            ar-gradient(145deg, #111, #161616);
+            border-left: 4px solid var(--accent-gold);
+            padding: 2.5rem;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 4rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .about-section h2 {
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+        
+        .about-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .social-flex {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            background: var(--bg-card);
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: 1px solid #333;
+        }
+
+        .social-btn:hover {
+            background: var(--gradient);
+            color: #000;
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(243, 186, 47, 0.3);
+        }
+
+        /* Rich Footer */
+        footer {
+            padding: 4rem 2rem 2rem;
+            background-color: #000;
+            color: var(--text-secondary);
+            border-top: 2px solid #222;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-col h4 {
+            color: var(--accent-gold);
+            margin-bottom: 1.2rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-col ul li a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--accent-orange);
+        }
+
+        .disclaimer {
+            font-size: 0.85rem;
+            color: #555;
+            margin-top: 3rem;
+            border-top: 1px solid #222;
+            padding-top: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        @media screen and (max-width: 768px) {
+            nav ul {
+                display: none; /* simple responsive fix: typically use a hamburger toggle here */
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+<body>
+    <header>
+        <a href="#" class="logo">
+            <img src="./cit logo.jpg" alt="CIT Logo" class="header-logo">
+            <span class="highlight">CIT</span> Platform
+        </a>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#videos">Videos</a></li>
+                <li><a href="#pdfs">Resources</a></li>
+                <li><a href="#community">Community</a></li>
+                <li><a href="https://citchartanalyzer.app/" target="_blank" class="special-link">CIT Chart Analyzer ✨</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>LEARN. EARN. CONQUER.</h1>
+            <p>Your one-stop destination for all Crypto Info Tamil guides, PDF resources, and premium analysis tools.</p>
+        </section>
+
+        <!-- Promo Banner -->
+        <div class="promo-banner">
+            <div>
+                <h3>Explore Our Premium Tools</h3>
+                <p style="color: var(--text-secondary); font-size: 0.95rem;">Unlock the next level of your crypto journey today.</p>
+            </div>
+            <div class="promo-links">
+                <a href="https://citchartanalyzer.app/" target="_blank" class="promo-btn">🔍 CIT Chart Analyzer</a>
+                <a href="https://lootcrate.me/" target="_blank" class="promo-btn" style="background: var(--accent-orange); color: white;">🎁 Join Lootcrate.me</a>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- About Section -->
+            <div class="about-section" id="about">
+                <h2>Empowering Crypto Traders</h2>
+                <div class="about-text">
+                    <p><strong>Crypto Info Tamil (CIT)</strong> is the premier cryptocurrency education platform dedicated to the Tamil-speaking community. Our mission is to transform everyday beginners into highly profitable traders through deeply researched market insights, simplified technical analysis, and consistent airdrop guidance.</p>
+                    <p style="margin-top: 1rem;">Whether you are looking to master scalping, decode institutional smart money concepts (SMC), or discover the next 100x altcoin, CIT provides you with all the necessary tools and premium frameworks to stay ahead of the curve.</p>
+                </div>
+            </div>
+
+            <!-- Row 1: Videos Section -->
+            <h2 class="section-header" id="videos">Latest YouTube Videos</h2>
+            <div class="grid">
+                
+                <!-- Video 1 -->
+                <div class="card video-card">
+                    <iframe src="https://www.youtube.com/embed/3s4y2raHT-g?si=3iHMfIxfitFP0g6A" title="My Meteora Winning Strategy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <div class="video-content">
+                        <h3>Meteora Winning Strategy</h3>
+                        <p>Complete Tamil guide on executing a highly profitable winning strategy using Meteora protocols.</p>
+                        <a href="https://youtu.be/3s4y2raHT-g" target="_blank" class="btn" style="text-align: center; margin-top: auto;">Watch Full Video</a>
+                    </div>
+                </div>
+
+                <!-- Video 2 -->
+                <div class="card video-card">
+                    <iframe src="https://www.youtube.com/embed/cvBcQD-vjDg?si=ml5PSyaoQAGzzvFX" title="CIT Chart Analyser" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <div class="video-content">
+                        <h3>CIT Chart Analyzer Guide</h3>
+                        <p>A complete step-by-step tutorial on how to use our signature CIT Chart Analyzer app effectively.</p>
+                        <a href="https://citchartanalyzer.app/" target="_blank" class="btn" style="text-align: center; margin-top: auto; background: var(--accent-orange);">Try Analyzer</a>
+                    </div>
+                </div>
+
+                <!-- Video 3 -->
+                <div class="card video-card">
+                    <iframe src="https://www.youtube.com/embed/OE5DxyuGrHE?si=P0-aQrxPFvD8-LH5" title="Hey Elsa AI & Lootcrate" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <div class="video-content">
+                        <h3>Elsa AI & Lootcrate Guide</h3>
+                        <p>Simple airdrop guide covering Hey Elsa AI and a complete walkthrough on how to use Lootcrate.</p>
+                        <a href="https://lootcrate.me/" target="_blank" class="btn" style="text-align: center; margin-top: auto; background: var(--accent-orange);">Visit Lootcrate</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Row 2: Guides Section -->
+            <h2 class="section-header" id="pdfs">Guides & Folder Collections</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Meteoro Guide</h3>
+                    <p>Complete folder containing all Meteoro indicator guides and setup PDFs.</p>
+                    <a href="meteoro-guides.html" class="btn">Open Folder</a>
+                </div>
+                <div class="card">
+                    <h3>Common Crypto Guides</h3>
+                    <p>General guides covering basics, security, wallets, and risk management.</p>
+                    <a href="common-guides.html" class="btn">Open Folder</a>
+                </div>
+                <div class="card">
+                    <h3>Placeholder Folder</h3>
+                    <p>Space reserved for future indicator guides and setup resources.</p>
+                    <a href="#" class="btn">Coming Soon</a>
+                </div>
+            </div>
+
+            <!-- Row 3: Coming Soon Section -->
+            <h2 class="section-header" id="coming-soon">More Resources</h2>
+            <div class="grid">
+                <div class="card" style="opacity: 0.6; pointer-events: none;">
+                    <h3>New Indicator PDF</h3>
+                    <p>Currently in development. Will be released in next week's YouTube video.</p>
+                    <a href="#" class="btn" style="background: transparent; border: 1px solid var(--accent-gold); color: var(--accent-gold);">Coming Soon</a>
+                </div>
+                <div class="card" style="opacity: 0.6; pointer-events: none;">
+                    <h3>Advanced Trading Course</h3>
+                    <p>A full structured course mapping institutional footprints and liquidity.</p>
+                    <a href="#" class="btn" style="background: transparent; border: 1px solid var(--accent-gold); color: var(--accent-gold);">Coming Soon</a>
+                </div>
+                <div class="card" style="opacity: 0.6; pointer-events: none;">
+                    <h3>CIT Exclusive Tools</h3>
+                    <p>Premium tools and cheat sheets for members. To be announced.</p>
+                    <a href="#" class="btn" style="background: transparent; border: 1px solid var(--accent-gold); color: var(--accent-gold);">Coming Soon</a>
+                </div>
+            </div>
+            
+            <!-- Community Section -->
+            <h2 class="section-header" id="community" style="margin-top: 5rem;">Join the Core Community</h2>
+            <div class="about-section" style="background: transparent; border: none; border-top: 4px solid var(--accent-orange); border-radius: 0; padding-left: 0; padding-right: 0; box-shadow: none;">
+                <p style="color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 2rem;">Don't trade alone. Connect with thousands of passionate crypto traders. Get real-time updates, market alerts, airdrop tasks, and exclusive chat support directly from the CIT team.</p>
+                <div class="social-flex">
+                    <a href="https://t.me/CryptoInfoTamil" target="_blank" class="social-btn">📱 Telegram Channel</a>
+                    <a href="https://www.youtube.com/@cit_ofcl" target="_blank" class="social-btn">▶️ YouTube</a>
+                    <a href="https://twitter.com/cryptoinfotamil" target="_blank" class="social-btn">🐦 Twitter (X)</a>
+                    <a href="https://instagram.com/cryptoinfotamil" target="_blank" class="social-btn">📸 Instagram</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <a href="#" class="logo" style="font-size: 1.5rem; margin-bottom: 1rem; display: inline-flex;">
+                    <span class="highlight">CIT</span> Platform
+                </a>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; margin-top: 0.5rem; line-height: 1.6;">Learn, Earn, Conquer. The most trusted crypto education platform for the Tamil-speaking verified community.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#videos">Latest Updates</a></li>
+                    <li><a href="#pdfs">PDF Materials</a></li>
+                    <li><a href="https://citchartanalyzer.app/" target="_blank">Chart Analyzer</a></li>
+                    <li><a href="https://lootcrate.me/" target="_blank">Lootcrate</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact & Support</h4>
+                <ul>
+                    <li><a href="#">Business Inquiries</a></li>
+                    <li><a href="#">Support Chat</a></li>
+                    <li><a href="#community">Community Links</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="disclaimer">
+            <p><strong>Disclaimer:</strong> Cryptocurrency trading involves high risk and is not suitable for all investors. The content on this website and our YouTube channel is for educational purposes only and should not be considered financial advice.</p>
+            <p style="margin-top: 1.5rem; color: #444;">&copy; 2026 Crypto Info Tamil. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Promotional Popup -->
+    <div class="popup-overlay" id="promoPopup">
+        <div class="popup-content">
+            <span class="popup-close" id="closePopup">&times;</span>
+            <h2>Supercharge Your Trading 🚀</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">Don't miss out on our exclusive platforms running right now. Gain the ultimate edge in your crypto trades.</p>
+            
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <a href="https://citchartanalyzer.app/" target="_blank" class="promo-btn" style="padding: 1rem; font-size: 1.1rem; display: block;">
+                    👉 Try CIT Chart Analyzer
+                </a>
+                <a href="https://lootcrate.me/" target="_blank" class="promo-btn" style="padding: 1rem; font-size: 1.1rem; display: block; background: #222; color: var(--accent-gold); border: 1px solid var(--accent-gold);">
+                    🎉 Claim Your Lootcrate Now
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Trigger popup after a slight delay
+        document.addEventListener('DOMContentLoaded', () => {
+            const popup = document.getElementById('promoPopup');
+            const closeBtn = document.getElementById('closePopup');
+
+            // Show popup after 3.5 seconds
+            setTimeout(() => {
+                popup.classList.add('active');
+            }, 3500);
+
+            // Close popup function
+            const closePopup = () => {
+                popup.classList.remove('active');
+            };
+
+            closeBtn.addEventListener('click', closePopup);
+            
+            // Close if user clicks outside the modal
+            popup.addEventListener('click', (e) => {
+                if (e.target === popup) {
+                    closePopup();
+                }
+            });
+        });
+       
+// INTRO ANIMATION
+window.addEventListener("load", () => {
+
+    const tl = gsap.timeline();
+
+    // Logo zoom in
+    tl.to("#logoAnim", {
+        duration: 2,
+        scale: 1.5,
+        opacity: 1,
+        ease: "power3.out"
+    }, "start");
+
+    // Fade in loading wrapper
+    tl.to(".loading-wrapper", {
+        duration: 0.5,
+        opacity: 1,
+        ease: "power2.out"
+    }, "start+=0.5");
+
+    let percentObj = { percent: 0 };
+    tl.to(percentObj, {
+        duration: 2,
+        percent: 100,
+        ease: "power1.inOut",
+        onUpdate: function() {
+            document.getElementById("loadingPercent").innerText = Math.round(percentObj.percent) + "%";
+        }
+    }, "start+=0.5");
+
+    tl.to(".loading-bar", {
+        duration: 2,
+        width: "100%",
+        ease: "power1.inOut"
+    }, "start+=0.5");
+
+    // Slight zoom out (depth feel)
+    tl.to("#logoAnim", {
+        duration: 1,
+        scale: 1.1,
+        ease: "power2.inOut"
+    }, "start+=2.5");
+
+    // Fade out intro
+    tl.to("#intro", {
+        duration: 1,
+        opacity: 0,
+        onComplete: () => {
+            document.getElementById("intro").style.display = "none";
+        }
+    }, "start+=3.5");
+
+    // Hero text animation (bottom-left → position)
+    tl.to(".hero h1", {
+        duration: 1.5,
+        x: 200,
+        y: -200,
+        opacity: 1,
+        ease: "power3.out"
+    }, "-=0.5");
+
+});
+    </script>
+</body>
+
+<div id="intro">
+    <img src="./cit logo.jpg" id="logoAnim" />
+    <div class="loading-wrapper">
+        <div class="loading-text">LOADING <span id="loadingPercent">0%</span></div>
+        <div class="loading-bar-container">
+            <div class="loading-bar"></div>
+        </div>
+    </div>
+</div>
+
+</html>
